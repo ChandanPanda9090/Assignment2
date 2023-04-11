@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,9 @@ namespace Assignment2.Pages
 		{
 			((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
 			Thread.Sleep(3000);
+
+			WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+			wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(pay));
 			driver.FindElement(pay).Click();
 			
 			return new OrderConfirmation(driver);

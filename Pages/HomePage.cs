@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,6 @@ namespace Assignment2.Pages
 	public class HomePage
 	{
 		
-
-
 		private IWebDriver driver;
 
 		public HomePage(IWebDriver driver)
@@ -27,13 +26,8 @@ namespace Assignment2.Pages
 		By login = By.CssSelector(".esh-identity-name");
 		
 
-
-
-		
-
 		By ConinueShopp = By.XPath("//*[@class='btn esh-basket-checkout text-white']");
 		By BlackShirt = By.XPath("((//img[@class='esh-catalog-thumbnail'])[1]/parent::form/input)[1]");		
-		By Catalog = By.CssSelector(".esh-catalog-item.col-md-4");
 		By allpname = By.CssSelector(".esh-catalog-name");
 		By BrandName = By.XPath("(//option[@value='2'])[1]");
 		By Type = By.XPath(".//*[@id='CatalogModel_TypesFilterApplied']");
@@ -69,23 +63,26 @@ namespace Assignment2.Pages
 				{
 					driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);					
 					element.FindElement(Add).Click();
+					((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
 					Thread.Sleep(3000);
+
+					WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+					wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(ConinueShopp));
+					driver.FindElement(ConinueShopp).Click();
 
 				}
 				break;
 			}
 
 
-			 ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
-			Thread.Sleep(1000);
+			 //((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
+			
 
-			driver.FindElement(ConinueShopp).Click();
+			//WebDriverWait wait = new WebDriverWait(driver,TimeSpan.FromSeconds(10));
+			//wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(ConinueShopp));
+			//driver.FindElement(ConinueShopp).Click();
 
 			driver.FindElement(BlackShirt).Click();
-			((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
-			Thread.Sleep(3000);
-
-			driver.FindElement(Catalog).Click();
 			((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0,document.body.scrollHeight)");
 			Thread.Sleep(3000);
 

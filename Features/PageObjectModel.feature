@@ -2,10 +2,24 @@
 
 Login page in eShopOnWeb
 
-@Login
+
+
+@tag1
 Scenario: LoginPage
-	Given Enter Login Page
-	When Enter login Userid and Pasword
+
+	Given I lunch the application
+	When click on login button  
+	When  Enter the login details  'admin@microsoft.com' and 'Pass@word1'	
 	And Navigate to home
-	And  Navigate to details
-	Then Varify payment
+	And Add item
+	
+
+
+
+#@Login
+#Scenario: Invalid LoginPage
+#	Given Enter Login Page
+#	When Enter invalid Email id
+#	When Enter invalid password
+#	When click on login button	
+#	Then Varify payment

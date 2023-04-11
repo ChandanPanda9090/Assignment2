@@ -118,48 +118,25 @@ namespace Assignment2.Hooks
 			//When scenario passed
 			if (scenarioContext.TestError == null)
 			{
-				if (stepType == "Given")
+				
+
+				if (stepType == "Given" || stepType == "When" || stepType == "Then" || stepType == "And") 
 				{
 					_scenario.CreateNode<Given>(stepName);
 				}
-				else if (stepType == "When")
-				{
-					_scenario.CreateNode<When>(stepName);
-				}
-				else if (stepType == "Then")
-				{
-					_scenario.CreateNode<Then>(stepName);
-				}
-				else if (stepType == "And")
-				{
-					_scenario.CreateNode<And>(stepName);
-				}
+				
 			}
 
 			//When scenario fails
 			if (scenarioContext.TestError != null)
 			{
 
-				if (stepType == "Given")
+				if (stepType == "Given" || stepType == "When" || stepType == "Then" || stepType == "And")
 				{
 					_scenario.CreateNode<Given>(stepName).Fail(scenarioContext.TestError.Message,
 					MediaEntityBuilder.CreateScreenCaptureFromPath(addScreenshot(driver, scenarioContext)).Build());
 				}
-				else if (stepType == "When")
-				{
-					_scenario.CreateNode<When>(stepName).Fail(scenarioContext.TestError.Message,
-					MediaEntityBuilder.CreateScreenCaptureFromPath(addScreenshot(driver, scenarioContext)).Build());
-				}
-				else if (stepType == "Then")
-				{
-					_scenario.CreateNode<Then>(stepName).Fail(scenarioContext.TestError.Message,
-					MediaEntityBuilder.CreateScreenCaptureFromPath(addScreenshot(driver, scenarioContext)).Build());
-				}
-				else if (stepType == "And")
-				{
-					_scenario.CreateNode<And>(stepName).Fail(scenarioContext.TestError.Message,
-					MediaEntityBuilder.CreateScreenCaptureFromPath(addScreenshot(driver, scenarioContext)).Build());
-				}
+				
 			}
 		}
 	}

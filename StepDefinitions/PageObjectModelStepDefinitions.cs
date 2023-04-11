@@ -3,6 +3,7 @@ using Assignment2.Pages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools;
+using TechTalk.SpecFlow.Assist;
 
 namespace Assignment2.StepDefinitions
 {
@@ -19,26 +20,37 @@ namespace Assignment2.StepDefinitions
 
 		}
 
-		[Given(@"Enter Login Page")]
+		[Given(@"I lunch the application")]
 		public void GivenEnterTheYoutubeURL()
 		{
 			driver.Url = "https://localhost:44315/";
 			Thread.Sleep(3000);
 
-			HomePage homePage = new HomePage(driver);
-			homePage.clickOnIndex();
-
-			Thread.Sleep(3000);
-
-
 		}
 
-		[When(@"Enter login Userid and Pasword")]
-		public void WhenSearchForTheTestersTalkInYoutube()
-		{
 
+		//[When(@"click on login button")]
+		//public void WhenClickOnLoginButton()
+		//{
+		//	HomePage homePage = new HomePage(driver);
+		//	homePage.clickOnIndex();
+		//}
+
+
+		[When(@"click on login button")]
+		public void WhenClickOnLoginButton()
+		{
+			HomePage homePage = new HomePage(driver);
+				homePage.clickOnIndex();
+		}
+
+
+
+		[When(@"Enter the login details  '([^']*)' and '([^']*)'")]
+		public void WhenEnterTheLoginDetailsAnd(string p0, string p1)
+		{
 			LoginPage login = new LoginPage(driver);
-			bool success=login.clickUserPassword();
+			bool success = login.clickUserPassword();
 
 			Thread.Sleep(3000);
 
@@ -49,24 +61,23 @@ namespace Assignment2.StepDefinitions
 
 				Thread.Sleep(3000);
 			}
-			else 
+			else
 			{
 				return;
 			}
-
 		}
-
 
 		[When(@"Navigate to home")]
-		public void Navigatetohome()
+		public void WhenNavigateToHome()
 		{
-			CheackOut cheackOut = new CheackOut(driver);
-			cheackOut.againshopping();
-
+			HomePage homePage = new HomePage(driver);
+			homePage.item();
 
 		}
 
-		[When(@"Navigate to details")]
+
+
+		[When(@"Add item")]
 		public void Navigatetodetailsl()
 		{
 			Payment payment = new Payment(driver);
